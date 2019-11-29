@@ -1,0 +1,17 @@
+#dest-title {
+    font-size: 65px;
+    color: #ffff4d;
+    text-shadow: 2px 2px 2px black;
+}
+
+#hotspot-section {
+    background-color: #d3eded;
+    border-radius: 20px;
+
+}
+
+#follow-count {
+    font-size: 35px;
+    font-weight: bold;
+}
+

@@ -1,0 +1,9 @@
+.style-letter {
+    font-weight: bold;
+    color: #c2d1e8;
+}
+
+#nav-username:hover {
+    cursor: pointer;
+}
+

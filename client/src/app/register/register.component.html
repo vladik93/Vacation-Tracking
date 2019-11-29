@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mt-5">
+      <div class="card-header text-white bg-dark">
+        <h1 class="text-center">Registration</h1>
+      </div>
+      <div class="card-body">
+        <form #newUserForm="ngForm" (ngSubmit)="onNewUserSubmit(newUserForm.value)">
+          <div class="form-group text-center col-md-6 offset-md-3">
+            <label for="reg-firstname">First Name</label>
+            <input type="text" class="form-control" id="reg-firstname" name="first_name" [(ngModel)]="userModel.first_name" required>
+          </div>
+          <div class="form-group text-center col-md-6 offset-md-3">
+            <label for="reg-lastname">Last Name</label>
+            <input type="text" class="form-control" id="reg-lastname" name="last_name" [(ngModel)]="userModel.last_name" required>
+          </div>
+          <div class="form-group text-center col-md-6 offset-md-3">
+            <label for="reg-username">Username</label>
+            <input type="text" class="form-control" id="reg-username" name="username" [(ngModel)]="userModel.username" required>
+          </div>
+          <div class="form-group text-center col-md-6 offset-md-3">
+            <label for="reg-password">Password</label>
+            <input type="password" class="form-control" id="reg-password" name="password" [(ngModel)]="userModel.password" required>
+          </div>
+          <button class="btn btn-outline-dark  btn-block col-md-2 offset-md-5">Sign Up</button>
+          <div class="alert alert-warning mt-3" *ngIf="errorMsg !== ''">{{errorMsg}}</div>
+        </form>
+      </div>
+      <div class="card-footer bg-dark p-4">
+        <a class="text-white" routerLink="/login" routerLinkActive="active">Login</a>
+      </div>
+    </div>
+  </div>
+</div>

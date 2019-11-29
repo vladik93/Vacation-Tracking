@@ -1,0 +1,41 @@
+.fa-edit {
+    font-size: 30px;
+    color: #92afdb;
+    cursor: pointer;
+}
+
+.fa-trash {
+    font-size: 30px;
+    color: #ea7a5b;
+    cursor: pointer;   
+}
+
+.card-group {
+    margin-top: 130px;
+}
+
+.card-body {
+    position: relative;
+}
+
+#vacation-add {
+    margin-top: 80px;
+    font-size: 40px;
+}
+
+#vacation-add i:hover {
+    cursor: pointer;
+}
+
+.vac-extra-text {
+    font-size: 12px;
+}
+
+.style-letter {
+    font-weight: bold;
+    color: #c2d1e8;
+}
+
+.follow-section {
+    box-shadow: 3px 2px 2px gray;
+}

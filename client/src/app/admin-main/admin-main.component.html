@@ -1,0 +1,117 @@
+<app-header></app-header>
+<div class="row" id="vacation-add">
+  <div class="col-md-12">
+    <i class="fas fa-plus text-dark" tooltip="Add New Vacation" placement="right" (click)="openModal(template)"></i>
+  </div>
+</div>
+<div class="row card-group">
+    <div class="col-md-4 mb-5"  *ngFor="let vacation of vacations">
+      <div class="card h-100">
+        <div class="card-header text-white bg-dark pt-3">
+          <h4 class="text-center">{{vacation.destination}}</h4>
+          <i class="fas fa-edit offset-md-4" (click)="openModal(editVacation); showVacationById(vacation.id)"></i>
+          <i class="fas fa-trash offset-md-2" (click)="onDeleteVacation(vacation.id)"></i>
+        </div>
+        <div class="card-body">
+          <p>{{vacation.description}}</p>
+          <p class="text-primary" style="display:inline-block;">{{vacation.price}} <span><i class="fas fa-shekel-sign"></i></span></p>
+          <p class="d-inline-block ml-4 bg-dark text-warning p-2 rounded follow-section">
+            Followers: <span class="text-white"> {{vacation.follow_count}}</span>
+          </p>
+          <img class="card-img-top" src="{{vacation.checked_image}}" alt="Card image cap" width="150" height="200">
+        </div>
+        <div class="card-footer text-white bg-dark">
+          <p class="offset-md-2">{{vacation.start_date_format}} - {{vacation.end_date_format}}</p>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+
+<!-- VACATION ADD MODAL -->
+<ng-template #template>
+  <div class="modal-header bg-dark text-white">
+    <h3 class="modal-title pull-left offset-md-4">Add Vacation</h3>
+        <button type="button" class="close pull-right" 
+                aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #addForm="ngForm" (submit)="onAddVacation(addForm.value)">
+      <div class="form-group text-center">
+        <label for="vac-destination">Destination <span class="vac-extra-text text-muted">(City, Country)</span></label>
+        <input type="text" class="form-control" id="vac-destination" name="destination" ngModel>
+      </div>
+      <div class="form-group text-center">
+        <label for="vac-description">Description</label>
+        <input type="text" class="form-control" id="vac-description" name="description" ngModel>
+      </div>
+      <div class="form-group text-center">
+        <label for="vac-image">Image <span class="vac-extra-text text-muted">(Url)</span></label>
+        <input type="text" class="form-control" id="vac-image"  name="image" [ngModel]="imageUrl">
+      </div>
+      <div class="form-group text-center">
+        <label for="start-date">Start Date <span class="vac-extra-text text-muted">(From Datepicker)</span></label>
+        <input type="text" class="form-control" id="start-date" bsDatepicker name="start_date" ngModel>
+      </div>
+      <div class="form-group text-center">
+        <label for="end-date">End Date <span class="vac-extra-text text-muted">(From Datepicker)</span></label>
+        <input type="text" class="form-control" id="end-date" bsDatepicker name="end_date" ngModel>
+      </div>
+      <div class="form-group text-center">
+        <label for="vac-price">Price </label>
+        <input type="number" class="form-control" id="vac-price" name="price" ngModel>
+      </div>
+      <button type="submit" class="btn btn-outline-dark  btn-block col-md-2 offset-md-5" (click)="modalRef.hide()">Submit</button>
+    </form>
+  </div>
+  <div class="modal-footer bg-dark text-white p-4">
+    
+  </div>
+</ng-template>
+
+<ng-template #editVacation>
+    <div class="modal-header bg-dark text-white">
+      <h3 class="modal-title pull-left offset-md-4">Edit Vacation ( ID: {{vacationById?.id}} )</h3>
+          <button type="button" class="close pull-right" 
+                  aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #updateForm="ngForm" (ngSubmit)="onUpdateVacation(updateForm.value)">
+        <div class="form-group text-center">
+          <input type="hidden" class="form-control" id="vac-destination" name="id" [(ngModel)]="vacationById.id">
+        </div>
+        <div class="form-group text-center">
+          <label for="vac-destination">Destination <span class="vac-extra-text text-muted">(City, Country)</span></label>
+          <input type="text" class="form-control" id="vac-destination" name="destination" [(ngModel)]="vacationById.destination">
+        </div>
+        <div class="form-group text-center">
+          <label for="vac-description">Description</label>
+          <input type="text" class="form-control" id="vac-description" name="description" [(ngModel)]="vacationById.description">
+        </div>
+        <div class="form-group text-center">
+          <label for="vac-image">Image <span class="vac-extra-text text-muted">(Url)</span></label>
+          <input type="text" class="form-control" id="vac-image" name="image" [(ngModel)]="vacationById.checked_image">
+        </div>
+        <div class="form-group text-center">
+          <label for="start-date">Start Date <span class="vac-extra-text text-muted">(From Datepicker)</span></label>
+          <input type="text" class="form-control" id="start-date" (ngModelChange)="onStartDateChange()"  bsDatepicker name="start_date" [(ngModel)]="vacationById.start_date_format">
+        </div>
+        <div class="form-group text-center">
+          <label for="end-date">End Date <span class="vac-extra-text text-muted">(From Datepicker)</span></label>
+          <input type="text" class="form-control" id="end-date" (ngModelChange)="onEndDateChange()"  bsDatepicker name="end_date" [(ngModel)]="vacationById.end_date_format">
+        </div>
+        <div class="form-group text-center">
+          <label for="vac-price">Price</label>
+          <input type="number" class="form-control" id="vac-price" name="price" [(ngModel)]="vacationById.price">
+        </div>
+        <button class="btn btn-outline-dark  btn-block col-md-2 offset-md-5" (click)="modalRef.hide()">Submit</button>
+      </form>
+    </div>
+    <div class="modal-footer bg-dark text-white p-4">
+    </div>
+  </ng-template>

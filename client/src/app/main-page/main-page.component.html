@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="row card-group">
+    <div class="col-md-4 mb-5"  *ngFor="let vacation of vacations">
+      <div class="card h-100">
+        <div class="card-header text-white bg-dark">
+          <h4 class="text-center">{{vacation.destination}}</h4>
+          <!-- note: NgStyle finally worked with async variable! Refer to this for next project/homework -->
+          <i class="offset-md-6 fas fa-thumbtack" (click)="onFollow(vacation.id)" [ngStyle]="{'color': !vacation.user_id ? '#e6f3ff': '#0099cc'}"></i>
+        </div>
+        <div class="card-body">
+          <p>{{vacation.description}}</p>
+          <p class="text-primary">{{vacation.price}} <span><i class="fas fa-shekel-sign"></i></span></p>
+          <img class="card-img-top" src="{{vacation.checked_image}}" alt="Card image cap" width="150" height="200">
+        </div>
+        <div class="card-footer text-white bg-dark">
+          <p class="offset-md-2">{{vacation.start_date_format}} - {{vacation.end_date_format}}</p>
+        </div>
+      </div>
+  </div>
+</div>
+
+{{likeStatus.status| json}}
+
+

@@ -1,0 +1,16 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark p-2">
+  <a class="navbar-brand" href="#"><span class="style-letter">M</span>y<span class="style-letter">T</span>rip</a>
+  <ul class="navbar-nav mr-auto offset-md-9">
+    <li class="nav-item active">
+      <a class="nav-link" id="nav-username">{{session.first_name}} {{session.last_name}}</a>
+    </li>
+    <li class="nav-item-active" *ngIf="session.admin.data == 1">
+      <a class="nav-link text-white"  routerLink="/admin/reports" routerLinkActive="active" *ngIf="router.url === '/admin'" >Reports</a>
+      <a class="nav-link text-white" routerLink="/admin" routerLinkActive="active" *ngIf="router.url === '/admin/reports'">Home</a>
+    </li>
+    <li class="nav-item active">
+      <button class="btn btn-link text-white" id="nav-logout" (click)="onSessionLogout()">Logout</button>
+    </li>
+  </ul>
+</nav>
+
